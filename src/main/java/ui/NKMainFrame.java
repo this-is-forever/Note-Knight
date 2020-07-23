@@ -735,6 +735,11 @@ public class NKMainFrame extends JFrame implements DocumentListener, WindowListe
         }).start();
     }
 
+    /**
+     * Enables or disables the frame's menus (File, Edit.. etc). Used to enable or disable the menus during
+     * opening and saving.
+     * @param enabled Flag set if the menus should be enabled, otherwise false
+     */
     private void enableDisableMenus(boolean enabled) {
         for(MenuElement m : menuBar.getSubElements())
             if(m instanceof JMenu) {
