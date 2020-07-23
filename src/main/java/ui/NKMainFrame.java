@@ -327,10 +327,14 @@ public class NKMainFrame extends JFrame implements DocumentListener, WindowListe
 
         // Create a scroll pane for the text area that can be used when the document is too large for the frame
         JScrollPane textAreaScroller = new JScrollPane(textArea);
-        // Determine the OS's default border color for text fields (used in the next step)
-        LineBorder border = (LineBorder) UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border");
-        // Remove all borders on the scroll pane, except for the bottom
-        textAreaScroller.setBorder(new MatteBorder(0, 0, 1, 0, border.getLineColor()));
+        try {
+            // Determine the OS's default border color for text fields (used in the next step)
+            LineBorder border = (LineBorder) UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border");
+            // Remove all borders on the scroll pane, except for the bottom
+            textAreaScroller.setBorder(new MatteBorder(0, 0, 1, 0, border.getLineColor()));
+        } catch(ClassCastException e) {
+            System.out.println("Unable to set hide JScrollPane borders");
+        }
         // Only show scroll bars if they're needed
         textAreaScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         textAreaScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);

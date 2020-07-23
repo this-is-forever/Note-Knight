@@ -3,6 +3,7 @@ package cryptography;
 import com.lambdaworks.crypto.SCrypt;
 
 import javax.crypto.*;
+import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.IvParameterSpec;
 import javax.security.auth.DestroyFailedException;
 import java.io.*;
@@ -23,6 +24,7 @@ public class Crypto {
     // Used for creating byte arrays from Strings/char[] and vice versa
     private static final Charset ENCODER = StandardCharsets.UTF_8;
     // The algorithm used during encryption
+    //private static final String ALGORITHM_MODE_PADDING = "AES/GCM/NoPadding";
     private static final String ALGORITHM_MODE_PADDING = "AES/CBC/PKCS5PADDING";
     private static final String ALGORITHM = "AES";
 
@@ -202,6 +204,7 @@ public class Crypto {
             // Generate a Cipher object that uses the predefined algorithm mode
             c = Cipher.getInstance(ALGORITHM_MODE_PADDING);
             // Initialize the Cipher using the generated key and the initialization vector
+            //c.init(Cipher.DECRYPT_MODE, key, new GCMParameterSpec(iv.length * 8, iv));
             c.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(iv));
             // Attempt to decrypt the data (An exception is thrown here if the password was incorrect)
             return c.doFinal(cipherText);
@@ -229,6 +232,7 @@ public class Crypto {
             c = Cipher.getInstance(ALGORITHM_MODE_PADDING);
 
             // Initialize the cipher for encryption using the key and IV
+            //c.init(Cipher.ENCRYPT_MODE, key, new GCMParameterSpec(iv.length * 8, iv));
             c.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(iv));
 
             //Save all of the password info as a string of characters separated by string terminating characters
