@@ -7,6 +7,10 @@ Utilize the following command to have Maven compile the program and build a JAR:
 
     mvn assembly:assembly
 
+You will then find the executable JAR file produced by Maven in the **target** folder. You can either open it through your Operating System's file explorer, or run the following command from the command line after running the above command:
+
+    javaw -classpath target/note-knight-1.1-jar-with-dependencies.jar application.Main
+
 Just want to try out the application? You can download it from [here](https://github.com/this-is-forever/Note-Knight/raw/master/note-knight-1.1-jar-with-dependencies.jar).
 
 You should be able to open the JAR file from Windows Explorer (or your OS's equivalent). If not, the following command works just as well:
