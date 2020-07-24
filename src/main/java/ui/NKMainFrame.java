@@ -333,7 +333,7 @@ public class NKMainFrame extends JFrame implements DocumentListener, WindowListe
             // Remove all borders on the scroll pane, except for the bottom
             textAreaScroller.setBorder(new MatteBorder(0, 0, 1, 0, border.getLineColor()));
         } catch(ClassCastException e) {
-            System.out.println("Unable to set hide JScrollPane borders");
+            System.out.println("Unable to hide JScrollPane borders");
         }
         // Only show scroll bars if they're needed
         textAreaScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -786,7 +786,13 @@ public class NKMainFrame extends JFrame implements DocumentListener, WindowListe
      * @return the resulting {@link String}
      */
     private String readFile(File f, char[] password) {
-        return Crypto.decryptStringFromFile(f, password);
+        try {
+            return Crypto.decryptStringFromFile(f, password);
+        } catch(RuntimeException e) {
+            e.printStackTrace();
+            // TO-DO: implement something that tells the user something went horribly wrong
+            return null;
+        }
     }
 
     /**
