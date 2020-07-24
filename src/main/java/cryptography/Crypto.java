@@ -145,6 +145,9 @@ public class Crypto {
      * @param f The file to write to
      * @param data The data, as bytes, to encrypt
      * @param key The key to encrypt with
+     * @param salt The salt used when generating the key
+     * @param authKey The key to authenticate with
+     * @param authSalt The salt used when generating the authorization key
      * @return true on success, otherwise false
      */
     public static boolean encryptFile(File f, byte[] data,
@@ -220,9 +223,13 @@ public class Crypto {
     }
 
     /**
-     * Decrypts the given cipher text data using the given key
+     * Decrypts the given cipher text data using the given key, authenticating the data in the process to ensure
+     * it wasn't tampered with
      * @param cipherText The data to encrypt
+     * @param authData Authorization data that will be used to ensure cipherText wasn't altered
+     * @param iv The initialization vector originally used during encryption
      * @param key The key to use during decryption
+     * @param authKey The key to use during authentication
      * @return The resulting plaintext bytes if successful, otherwise null
      */
     public static byte[] decrypt(byte[] cipherText, byte[] authData, byte[] iv, SecretKey key, SecretKey authKey)
@@ -252,7 +259,10 @@ public class Crypto {
     /**
      * Attempts to encrypt plaintext data using a given key
      * @param plaintext The data to encrypt
-     * @param key The keyto encrypt with
+     * @param key The key to encrypt with
+     * @param salt The salt the key was generated with
+     * @param authKey The key used to generate authentication data
+     * @param authSalt The salt used to generate the authentication key
      * @return The resulting encrypted data, otherwise null. Resulting size will be plaintext.length + IV length.
      */
     public static byte[] encrypt(byte[] plaintext, SecretKey key, byte[] salt, SecretKey authKey, byte[] authSalt) {
