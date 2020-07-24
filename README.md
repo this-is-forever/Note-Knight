@@ -11,6 +11,6 @@ Just want to try out the application? You can download it from [here](https://gi
 
 You should be able to open the JAR file from Windows Explorer (or your OS's equivalent). If not, the following command works just as well:
 
-javaw -classpath note-knight-1.1-jar-with-dependencies.jar application.Main
+    javaw -classpath note-knight-1.1-jar-with-dependencies.jar application.Main
 
 You can configure Windows to open .nkx files with launcher.bat, that way you can open right into Note Knight from Windows Explorer!
