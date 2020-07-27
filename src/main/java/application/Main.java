@@ -25,6 +25,9 @@ public class Main {
             // Does the file exist? If not, throw an error
             assert file.exists() : "Error: File does not exist!";
         }
+        
+        assert file != null : "Please Give A File";
+        
         // Create a new application frame
         NKMainFrame frame = new NKMainFrame(file);
         // Create and show the UI on the Swing UI thread
